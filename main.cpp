@@ -2,6 +2,23 @@
 
 using namespace std;
 
+void Sorteo_burbuja(int* arreglo, int size)
+{
+	int aux;
+	for (int i = 0; i < (size-1); i++)
+	{
+		for (int j = 0; j < (size-1); j++)
+		{
+			if(arreglo[j] > arreglo[j+1])
+			{
+				aux = arreglo[j];
+				arreglo[j] = arreglo[j+1];
+				arreglo[j+1]=aux;
+			}
+		}
+	}
+}
+
 int Separar_flash(int* arreglo, int inicio, int fin)
 {
 	//Numero a comparar con los demas.
@@ -80,14 +97,14 @@ void flash_sort(int *arreglo,int inicio,int fin)
 int sumar(int *arreglo,int size, int dinero)
 {
 	//Variable que almacenara la cantidad de juegos.
-	int cantidad;
+	int cantidad = 0;
 
 	//Recorreremos el arreglo ordenado de menor a mayor precio.
 	for (int i = 0; i < size; i++)
 	{
 		//Si la resta del presupuesto con el valor del juego es mayor que 0
 		//podemos seguir comprando!
-		if(dinero - arreglo[i] > 0)
+		if((dinero - arreglo[i]) > 0)
 		{
 			//Un juego mas a la cuenta de steam.
 			cantidad++;
@@ -141,9 +158,9 @@ int main()
 	{
 		cin >> costos[i];
 	}
-	
+
 	//Se llama al algoritmo para ordenarlos.
-	flash_sort(costos, 0, (juegos-1));
+	Sorteo_burbuja(costos, juegos);
 
 	//Se llama a la funcion para entregar la cantidad de juegos.
 	cantidad = sumar(costos, juegos, dinero);
